@@ -4,6 +4,7 @@ const countries = require('../controllers/countries.js');
 const players = require('../controllers/players.js');
 const match = require('../controllers/match.js');
 const pokemon = require('../controllers/pokemon.js');
+const events = require('../controllers/events.js');
 
 router.get('/getAllCountries', countries.getAllCountries);
 
@@ -20,5 +21,7 @@ router.get('/getMatch', match.getMatch);
 router.get('/getAllMatches', match.getAllMatches);
 
 router.get('/getAllPokemon', pokemon.getAllPokemon);
+
+router.get('/getAllEvents', events.getAllEvents);
 
 module.exports = router;
