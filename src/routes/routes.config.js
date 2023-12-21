@@ -27,6 +27,8 @@ router.get('/getAllPokemon', pokemon.getAllPokemon);
 
 router.get('/getAllEvents', events.getAllEvents);
 
+router.post('/createNewEvent', events.createNewEvent);
+
 router.get('/getAllFormats', formats.getAllFormats);
 
 router.post('/addPokemon', pokemon.insertPokemon);
