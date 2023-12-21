@@ -7,8 +7,8 @@ async function getMatch(id){
 		.join('events', 'events.id', '=', 'match.event_id')
 		.join('players as p1', 'p1.id', '=', 'match.id_player1')
 		.join('players as p2', 'p2.id', '=', 'match.id_player2')
-		.join('players as c1', 'c1.id', '=', 'match.id_caster1')
-		.join('players as c2', 'c2.id', '=', 'match.id_caster2')
+		.leftOuterJoin('players as c1', 'c1.id', '=', 'match.id_caster1')
+		.leftOuterJoin('players as c2', 'c2.id', '=', 'match.id_caster2')
 		.leftJoin('formats', 'formats.id', '=', 'events.format_id')
 		.leftJoin('countries as cp1', 'cp1.id', '=', 'p1.country_id')
 		.leftJoin('countries as cp2', 'cp2.id', '=', 'p2.country_id')
@@ -231,7 +231,71 @@ async function getAllMatches(){
 	return match;
 }
 
+async function createNewMatch(event_id, date, round, age_division, id_player1, id_player2, id_caster1, id_caster2, pokemon1_p1, pokemon2_p1, pokemon3_p1, pokemon4_p1, pokemon5_p1, pokemon6_p1, pokemon1_p2, pokemon2_p2, pokemon3_p2, pokemon4_p2, pokemon5_p2, pokemon6_p2, lead1_p1_g1, lead2_p1_g1, back1_p1_g1, back2_p1_g1, lead1_p2_g1, lead2_p2_g1, back1_p2_g1, back2_p2_g1, lead1_p1_g2, lead2_p1_g2, back1_p1_g2, back2_p1_g2, lead1_p2_g2, lead2_p2_g2, back1_p2_g2, back2_p2_g2, lead1_p1_g3, lead2_p1_g3, back1_p1_g3, back2_p1_g3, lead1_p2_g3, lead2_p2_g3, back1_p2_g3, back2_p2_g3, video_url){
+
+	const knex = await connectDatabase();
+
+	for (let i = 0; i < arguments.length; i++) {
+		if (arguments[i] == '' || arguments[i] == -1) {
+			arguments[i] = null;
+		}
+	}
+
+	let newMatch = await knex('match').insert({
+		event_id: event_id,
+		date: date,
+		round: round,
+		age_division: age_division,
+		id_player1: id_player1,
+		id_player2: id_player2,
+		id_caster1: id_caster1,
+		id_caster2: id_caster2,
+		pokemon1_p1: pokemon1_p1,
+		pokemon2_p1: pokemon2_p1,
+		pokemon3_p1: pokemon3_p1,
+		pokemon4_p1: pokemon4_p1,
+		pokemon5_p1: pokemon5_p1,
+		pokemon6_p1: pokemon6_p1,
+		pokemon1_p2: pokemon1_p2,
+		pokemon2_p2: pokemon2_p2,
+		pokemon3_p2: pokemon3_p2,
+		pokemon4_p2: pokemon4_p2,
+		pokemon5_p2: pokemon5_p2,
+		pokemon6_p2: pokemon6_p2,
+		lead1_p1_g1: lead1_p1_g1,
+		lead2_p1_g1: lead2_p1_g1,
+		back1_p1_g1: back1_p1_g1,
+		back2_p1_g1: back2_p1_g1,
+		lead1_p2_g1: lead1_p2_g1,
+		lead2_p2_g1: lead2_p2_g1,
+		back1_p2_g1: back1_p2_g1,
+		back2_p2_g1: back2_p2_g1,
+		lead1_p1_g2: lead1_p1_g2,
+		lead2_p1_g2: lead2_p1_g2,
+		back1_p1_g2: back1_p1_g2,
+		back2_p1_g2: back2_p1_g2,
+		lead1_p2_g2: lead1_p2_g2,
+		lead2_p2_g2: lead2_p2_g2,
+		back1_p2_g2: back1_p2_g2,
+		back2_p2_g2: back2_p2_g2,
+		lead1_p1_g3: lead1_p1_g3,
+		lead2_p1_g3: lead2_p1_g3,
+		back1_p1_g3: back1_p1_g3,
+		back2_p1_g3: back2_p1_g3,
+		lead1_p2_g3: lead1_p2_g3,
+		lead2_p2_g3: lead2_p2_g3,
+		back1_p2_g3: back1_p2_g3,
+		back2_p2_g3: back2_p2_g3,
+		video_url: video_url
+	});
+
+	knex.destroy();
+
+	return newMatch;
+}
+
 module.exports = {
 	getMatch,
-	getAllMatches
+	getAllMatches,
+	createNewMatch
 };

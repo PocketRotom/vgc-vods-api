@@ -44,9 +44,7 @@ async function getPlayerByCountry(country_id){
 
 async function addNewPlayer(name, nickname, country_id, is_caster){
 	const knex = await connectDatabase();
-
-	console.log(name, nickname, country_id, is_caster);
-
+	
 	let newPlayer = await knex('players').insert({
 		player_name: name,
 		nickname: nickname,

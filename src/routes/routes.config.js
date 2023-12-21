@@ -23,6 +23,8 @@ router.get('/getMatch', match.getMatch);
 
 router.get('/getAllMatches', match.getAllMatches);
 
+router.post('/addMatch', match.createNewMatch);
+
 router.get('/getAllPokemon', pokemon.getAllPokemon);
 
 router.get('/getAllEvents', events.getAllEvents);
