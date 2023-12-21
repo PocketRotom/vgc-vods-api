@@ -6,6 +6,7 @@ const cors = require('cors');
 dotenv.config();
 
 const app = express();
+app.use(express.text());
 app.use(express.json());
 
 if (process.env.NODE_ENV === 'development') {

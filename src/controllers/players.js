@@ -62,5 +62,23 @@ module.exports = {
 				error: error
 			});
 		}
+	},
+	addNewPlayer: async (req, res) => {
+		try {
+			let name = req.query.player_name;
+			let nickname = req.query.nickname;
+			let country_id = req.query.country_id;
+			let is_caster = req.query.is_caster;
+			let newPlayer = await Players.addNewPlayer(name, nickname, country_id, is_caster);
+			return res.status(200).json({
+				success: true,
+				data: newPlayer,
+			});
+		} catch (error) {
+			return res.status(500).json({
+				success: false,
+				error: error
+			});
+		}
 	}
 };
