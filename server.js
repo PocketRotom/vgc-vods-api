@@ -17,7 +17,9 @@ if (process.env.NODE_ENV === 'development') {
 
 const routes = require('./src/routes/routes.config');
 
-app.use(cors());
+
+
+app.use(cors({origin: '*'}));
 app.use('/', routes);
 
 const port = process.env.PORT || 3001;
