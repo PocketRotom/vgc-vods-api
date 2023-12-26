@@ -6,6 +6,7 @@ const match = require('../controllers/match.js');
 const pokemon = require('../controllers/pokemon.js');
 const events = require('../controllers/events.js');
 const formats = require('../controllers/formats.js');
+const auth = require('../controllers/auth.js');
 
 router.get('/getAllCountries', countries.getAllCountries);
 
@@ -36,5 +37,11 @@ router.get('/getAllFormats', formats.getAllFormats);
 router.post('/addPokemon', pokemon.insertPokemon);
 
 router.post('/addPokemonBody', pokemon.insertPokemonByBody);
+
+router.post('/signup', auth.doSignup);
+
+router.post('/login', auth.doLogin);
+
+router.post('/verifyToken', auth.verifyToken);
 
 module.exports = router;
